@@ -6,18 +6,7 @@ calc = Tk(className='Calculator')
 calc.geometry("320x421")
 calc.resizable(0,0)
 #Define variable for the display
-resultext=""
-#Define functions
-def addnum(x):
-    global resultext
-    global result
-    resultext = result.cget("text")+x
-    result.configure({"text": resultext})
-def clear():
-    global result
-    result.configure({"text": ""})
-#def sum():
-
+resultext="" 
 #Define GUI elements
 result = Label(calc,text="", height=4,width=44)
 nine = Button(calc,text="9", width=10, height=4,command=lambda: addnum("9"))
@@ -32,11 +21,33 @@ one = Button(calc,text="1", width=10, height=4,command=lambda: addnum("1"))
 zero = Button(calc,text="0", width=10, height=4,command=lambda: addnum("0"))
 decimal = Button(calc,text=".", width=10, height=4,command=lambda: addnum("."))
 delete = Button(calc, text="C", width=10, height=4,command=lambda: clear())
-sum = Button(calc, text="+", width=10, height=4)
-subtract = Button(calc, text="-", width=10, height=4)
-multiply = Button(calc, text="x", width=10, height=4)
-divide = Button(calc, text="/", width=10, height=4)
-equal = Button(calc, text="=",width=44, height=4)
+sum = Button(calc, text="+", width=10, height=4,command=lambda: operator("+"))
+subtract = Button(calc, text="-", width=10, height=4,command=lambda: operator("-"))
+multiply = Button(calc, text="x", width=10, height=4,command=lambda: operator("*"))
+divide = Button(calc, text="÷", width=10, height=4, command=lambda: operator("/"))
+equal = Button(calc, text="=",width=44, height=4,command=lambda: calculate())
+
+#Define functions
+
+
+def addnum(x):
+    global resultext
+    global result
+    resultext = result.cget("text")+x
+    result.configure({"text": resultext})
+
+
+def clear():
+    global result
+    result.configure({"text": ""})
+
+
+def operator(o):
+    global result
+
+def calculate():
+    global result
+
 #Place previus elements inside GUI grid
 result.grid(row="0", column="0", columnspan="4")
 nine.grid(row="1", column="0")

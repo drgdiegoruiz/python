@@ -35,15 +35,16 @@ equal = Button(calc, text="=",width=44, height=4,command=lambda: calculate())
 def addnum(x):
     global resultext
     global display1
-    content = str(display1.cget("text")).count(".")
+    content = str(display1.cget("text")).count(".") 
     if x == "." and content == 0:
         charnum=len(display1.cget("text"))
         if charnum == 0 :
             resultext = "0"+x
-            display1
+        elif charnum>0 :
+            resultext = display1.cget("text")+x
     elif x != ".":
         resultext = display1.cget("text")+x
-        display1.configure({"text": resultext})
+    display1.configure({"text": resultext})
 
 
 def clear():
@@ -54,7 +55,6 @@ def operator(x):
     global display1
     global display2
     global operation
-
     display2.configure({"text": display1.cget("text")})
     display1.configure({"text": ""})
     operation=x
@@ -63,34 +63,34 @@ def operator(x):
 def calculate():
     global operation
     if operation == "+":
-        result=int(display1.cget("text")) + int(display2.cget("text"))
+        result=float(display1.cget("text")) + float(display2.cget("text"))
         display1.configure({"text": result})
         display2.configure({"text": ""})
     if operation == "-":
-        result = int(display1.cget("text")) - int(display2.cget("text"))
+        result = float(display2.cget("text")) - float(display1.cget("text"))
         display1.configure({"text": result})
         display2.configure({"text": ""})
-    if operation == "x":
-        result = int(display1.cget("text")) * int(display2.cget("text"))
+    if operation == "*":
+        result = float(display1.cget("text")) * float(display2.cget("text"))
         display1.configure({"text": result})
         display2.configure({"text": ""})
     if operation == "/":
-        result = int(display2.cget("text")) / int(display1.cget("text"))
+        result = float(display2.cget("text")) / float(display1.cget("text"))
         display1.configure({"text": result})
         display2.configure({"text": ""})
 
 #Place previus elements inside GUI grid
 display1.grid(row="0", column="0", columnspan="4")
 display2.grid(row="1", column="0", columnspan="4")
-nine.grid(row="2", column="0")
+nine.grid(row="2", column="2")
 eight.grid(row="2", column="1")
-seven.grid(row="2", column="2")
-six.grid(row="3", column="0")
+seven.grid(row="2", column="0")
+six.grid(row="3", column="2")
 cinco.grid(row="3", column="1")
-four.grid(row="3", column="2")
-three.grid(row="4", column="0")
+four.grid(row="3", column="0")
+three.grid(row="4", column="2")
 two.grid(row="4", column="1")
-one.grid(row="4", column="2")
+one.grid(row="4", column="0")
 zero.grid(row="5", column="1")
 decimal.grid(row="5", column="2")
 delete.grid(row="5", column="0")
